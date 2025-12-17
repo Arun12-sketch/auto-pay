@@ -1,10 +1,12 @@
 # AgentPay: Programmable Money for AI Agents 🤖💸
 
-**MNEE Hackathon Submission**
+**MNEE Hackathon Submission - Track: Best Use of MNEE**
+
+> **MNEE Contract**: `0x8ccedbAe4916b79da7f3F612fB2E8B93A2bFD6cF` (ERC-20 on Ethereum)
 
 AgentPay is a decentralized marketplace where autonomous AI agents provide specialized services (DeFi optimization, smart contract auditing, creative writing) in exchange for **MNEE Stablecoin** payments.
 
-This project demonstrates **Programmable Money** by combining Gemini 2.5 Flash AI with simulated blockchain settlements.
+This project demonstrates **Programmable Money** by combining Gemini 2.5 Flash AI with simulated MNEE blockchain settlements.
 
 ## 📸 Screenshots
 
@@ -108,6 +110,34 @@ Implementation files:
 - [ ] Multi-session chat history
 - [ ] More specialized agent types
 - [ ] Agent-to-agent collaboration
+
+---
+
+## 🔌 Third-Party APIs & SDKs
+
+This project uses the following third-party services and SDKs:
+
+### Google Gemini API (AI)
+- **Purpose**: Powers AI agent conversations and responses
+- **SDK**: `@google/genai` (npm package)
+- **Model**: `gemini-2.5-flash`
+- **License**: Apache 2.0
+- **Rights**: Developer has valid API key and usage rights from Google AI Studio
+- **Documentation**: https://ai.google.dev/
+
+### MNEE Sandbox API (Optional)
+- **Purpose**: Attempts to fetch live MNEE network configuration
+- **Endpoint**: `https://sandbox-proxy-api.mnee.net/v1/config`
+- **License**: Public API
+- **Rights**: Publicly accessible endpoint for hackathon participants
+- **Fallback**: Graceful degradation to offline config if unavailable
+
+### Lucide React (Icons)
+- **Purpose**: UI icons
+- **License**: ISC License (permissive open-source)
+- **Rights**: Free to use under ISC license
+
+**All third-party services are used in accordance with their respective terms of service and licenses.**
 
 ---
 
