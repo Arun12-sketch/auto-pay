@@ -152,7 +152,4 @@ MIT License - See LICENSE file for details
 - **MNEE Network** for the hackathon opportunity
 - **Google Gemini** for powerful AI capabilities
 - **Lucide** for beautiful icons
-
----
-
-Built with ❤️ for the MNEE Hackathon
+  hello
