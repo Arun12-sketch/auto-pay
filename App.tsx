@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import PaymentModal from './components/PaymentModal';
 import ChatInterface from './components/ChatInterface';
+import AuraWalletPanel from './components/AuraWalletPanel';
 import { Icons } from './components/Icons';
 import { AgentService, WalletState, Transaction, MneeConfig } from './types';
 import { AGENT_SERVICES } from './constants';
@@ -96,7 +97,8 @@ function App() {
         amount: selectedService.priceMnee,
         timestamp: Date.now(),
         status: 'Completed',
-        txHash: '0x' + Array(40).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join('')
+        txHash: '0x' + Array(40).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+        type: 'crypto'
       };
 
       // 3. Update state and localStorage
@@ -283,6 +285,25 @@ function App() {
               </div>
             )}
 
+            {/* AURA Infra USD Wallet Section */}
+            <div className="pt-12 border-t border-slate-800/50">
+              <div className="mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 border border-blue-800 text-blue-400 text-sm font-medium mb-3">
+                  <Icons.DollarSign size={14} />
+                  Powered by AURA Infra
+                </div>
+                <h2 className="text-3xl font-bold text-white mb-2">Fiat Payment Bridge</h2>
+                <p className="text-slate-400 max-w-3xl">
+                  Convert your crypto earnings to USD and pay human contractors seamlessly. 
+                  AURA Infra connects Web3 agents with traditional finance.
+                </p>
+              </div>
+              <AuraWalletPanel 
+                isConnected={wallet.isConnected}
+                walletAddress={wallet.address}
+              />
+            </div>
+
             {/* Features Section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-slate-800/50">
                <div className="flex gap-4">
@@ -325,6 +346,7 @@ function App() {
                         <th className="px-6 py-4">Service</th>
                         <th className="px-6 py-4">Date</th>
                         <th className="px-6 py-4">Amount</th>
+                        <th className="px-6 py-4">Type</th>
                         <th className="px-6 py-4">Status</th>
                         <th className="px-6 py-4">Transaction Hash</th>
                       </tr>
@@ -336,6 +358,15 @@ function App() {
                           <td className="px-6 py-4">{formatDate(tx.timestamp)}</td>
                           <td className="px-6 py-4 text-emerald-400 font-medium">
                             {tx.amount.toFixed(2)} MNEE
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium ${
+                              tx.type === 'fiat' 
+                                ? 'bg-blue-900/30 text-blue-400 border border-blue-900/50' 
+                                : 'bg-purple-900/30 text-purple-400 border border-purple-900/50'
+                            }`}>
+                              {tx.type === 'fiat' ? '💵 USD' : '⚡ Crypto'}
+                            </span>
                           </td>
                           <td className="px-6 py-4">
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-400 border border-emerald-900/50">
