@@ -5,7 +5,7 @@ const AURA_API_BASE_URL = 'https://api.nanilabs.io';
 
 // Mock data for demo purposes since we don't have real API credentials
 const MOCK_WALLET_DATA = {
-  walletId: 'aura_wallet_' + Math.random().toString(36).substr(2, 9),
+  walletId: 'aura_wallet_' + Math.random().toString(36).substring(2, 11),
   balance: 0,
   currency: 'USD',
   status: 'active',
@@ -62,7 +62,7 @@ export const createAuraWallet = async (agentId: string): Promise<AuraWallet> => 
     
     const wallet: AuraWallet = {
       ...MOCK_WALLET_DATA,
-      walletId: `aura_${agentId}_${Math.random().toString(36).substr(2, 9)}`
+      walletId: `aura_${agentId}_${Math.random().toString(36).substring(2, 11)}`
     };
     
     console.log('✅ AURA Wallet Created:', wallet);
@@ -105,7 +105,7 @@ export const createAuraTransaction = async (
     }
     
     const transaction: AuraTransaction = {
-      transactionId: 'aura_tx_' + Math.random().toString(36).substr(2, 12),
+      transactionId: 'aura_tx_' + Math.random().toString(36).substring(2, 14),
       fromWallet,
       toWallet,
       amount,

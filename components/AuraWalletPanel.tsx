@@ -29,7 +29,6 @@ const AuraWalletPanel: React.FC<AuraWalletPanelProps> = ({ isConnected, walletAd
   const [transferDescription, setTransferDescription] = useState('');
   const [stats, setStats] = useState<AuraStats | null>(null);
   const [fiatTransactions, setFiatTransactions] = useState<FiatTransaction[]>([]);
-  const [fundAmount, setFundAmount] = useState('');
   const [isFunding, setIsFunding] = useState(false);
 
   // Load wallet state from localStorage
@@ -97,22 +96,21 @@ const AuraWalletPanel: React.FC<AuraWalletPanelProps> = ({ isConnected, walletAd
     }
   };
 
-  const handleFundWallet = async () => {
-    if (!fundAmount || parseFloat(fundAmount) <= 0) {
+  const handleFundWallet = async (amount: number) => {
+    if (!amount || amount <= 0) {
       alert('Please enter a valid amount');
       return;
     }
 
     setIsFunding(true);
     try {
-      const success = await fundWalletFromCrypto(auraWallet.walletId!, parseFloat(fundAmount));
+      const success = await fundWalletFromCrypto(auraWallet.walletId!, amount);
       if (success) {
-        const newBalance = auraWallet.balanceUsd + parseFloat(fundAmount);
+        const newBalance = auraWallet.balanceUsd + amount;
         const updatedWallet = { ...auraWallet, balanceUsd: newBalance };
         setAuraWallet(updatedWallet);
         localStorage.setItem(`aura_wallet_${walletAddress}`, JSON.stringify(updatedWallet));
-        setFundAmount('');
-        alert(`✅ Wallet funded with $${fundAmount} USD`);
+        alert(`✅ Wallet funded with $${amount.toFixed(2)} USD`);
       }
     } catch (error: any) {
       alert('Failed to fund wallet: ' + error.message);
@@ -293,9 +291,8 @@ const AuraWalletPanel: React.FC<AuraWalletPanelProps> = ({ isConnected, walletAd
           <button
             onClick={() => {
               const amount = prompt('Enter MNEE amount to convert to USD:');
-              if (amount) {
-                setFundAmount(amount);
-                handleFundWallet();
+              if (amount && !isNaN(parseFloat(amount))) {
+                handleFundWallet(parseFloat(amount));
               }
             }}
             className="py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors flex items-center justify-center gap-2 text-sm"
