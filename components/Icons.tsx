@@ -17,7 +17,12 @@ import {
   XCircle,
   Search,
   Filter,
-  X
+  X,
+  DollarSign,
+  Check,
+  Loader,
+  ArrowDownUp,
+  BarChart
 } from 'lucide-react';
 
 export const Icons = {
@@ -38,5 +43,10 @@ export const Icons = {
   XCircle,
   Search,
   Filter,
-  X
+  X,
+  DollarSign,
+  Check,
+  Loader,
+  ArrowDownUp,
+  BarChart
 };

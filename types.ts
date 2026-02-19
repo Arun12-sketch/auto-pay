@@ -38,6 +38,23 @@ export interface Transaction {
   timestamp: number;
   status: 'Completed' | 'Failed';
   txHash: string;
+  type?: 'crypto' | 'fiat'; // Added to distinguish payment types
+}
+
+export interface AuraWalletState {
+  isCreated: boolean;
+  walletId: string | null;
+  balanceUsd: number;
+}
+
+export interface FiatTransaction {
+  id: string;
+  description: string;
+  amount: number;
+  timestamp: number;
+  status: 'pending' | 'completed' | 'failed';
+  transactionId: string;
+  recipient?: string;
 }
 
 export interface MneeConfig {
